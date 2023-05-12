@@ -1,10 +1,14 @@
 package com.play.service.impl;
 
+import com.play.comment.ResultJSON;
 import com.play.entity.SysMenuInfo;
+import com.play.entity.vo.SysMenuInfoTreeVO;
 import com.play.mapper.SysMenuInfoMapper;
 import com.play.service.SysMenuInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * Description:
@@ -25,7 +29,20 @@ public class SysMenuInfoServiceImpl implements SysMenuInfoService {
     }
 
     @Override
-    public SysMenuInfo test() {
-        return sysMenuInfoMapper.test();
+    public String getSysMenuInfo() {
+        List<SysMenuInfoTreeVO> menuInfos=assembleSysMenuInfo(null);
+        return ResultJSON.success(menuInfos);
+    }
+
+    /**
+     * 拼装菜单方法
+     * @return
+     */
+    private List<SysMenuInfoTreeVO> assembleSysMenuInfo(Integer pId){
+        List<SysMenuInfoTreeVO> sysMenuInfoByPid = sysMenuInfoMapper.getSysMenuInfoByPid(pId);
+        sysMenuInfoByPid.forEach(sysMenuInfoTreeVO -> {
+            sysMenuInfoTreeVO.setList(assembleSysMenuInfo(sysMenuInfoTreeVO.getId()));
+        });
+        return sysMenuInfoByPid;
     }
 }

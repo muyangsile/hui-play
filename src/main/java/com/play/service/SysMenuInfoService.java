@@ -1,5 +1,6 @@
 package com.play.service;
 
+import com.play.comment.ResultJSON;
 import com.play.entity.SysMenuInfo;
 
 /**
@@ -12,6 +13,5 @@ import com.play.entity.SysMenuInfo;
  */
 public interface SysMenuInfoService {
     int addSysMenuInfo(SysMenuInfo sysMenuInfo);
-
-    SysMenuInfo test();
+    String getSysMenuInfo();
 }

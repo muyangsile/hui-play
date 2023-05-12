@@ -1,12 +1,17 @@
 package com.play;
 
+import com.alibaba.fastjson.JSON;
 import com.play.entity.SysMenuInfo;
+import com.play.entity.vo.SysMenuInfoTreeVO;
+import com.play.mapper.SysMenuInfoMapper;
 import com.play.service.SysMenuInfoService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.util.List;
 
 /**
  * Description:
@@ -22,22 +27,37 @@ public class SysMenuInfoMapperTest {
     @Autowired
     private SysMenuInfoService sysMenuInfoService;
 
+    @Autowired
+    private SysMenuInfoMapper sysMenuInfoMapper;
+
     @Test
     public void addSysMenuInfo() {
         SysMenuInfo sysMenuInfo=new SysMenuInfo();
-        sysMenuInfo.setName("businessManage");
-        sysMenuInfo.setTitle("商家管理");
+        sysMenuInfo.setName("businessInfoAudit");
+        sysMenuInfo.setTitle("审核商家");
         sysMenuInfo.setJump(null);
-        sysMenuInfo.setIcon("businessManage.png");
-        sysMenuInfo.setLevel(1);
-        sysMenuInfo.setPId(null);
+        sysMenuInfo.setIcon("businessInfoAudit.png");
+        sysMenuInfo.setLevel(2);
+        sysMenuInfo.setPId(1);
         sysMenuInfo.setCreateUser(null);
         int rows = sysMenuInfoService.addSysMenuInfo(sysMenuInfo);
         System.out.println(rows > 0 ? "添加成功" : "添加失败");
     }
 
     @Test
-    public void test(){
-        System.out.println(sysMenuInfoService.test());
+    public void getSysMenuInfoByPid(){
+//        sysMenuInfoMapper.getSysMenuInfoByPid(null).forEach(System.out::println);
+        List<SysMenuInfoTreeVO> sysMenuInfoTreeVOS = assembleSysMenuInfo(null);
+        sysMenuInfoTreeVOS.forEach(System.out::println);
+
+        System.out.println(JSON.toJSONString(sysMenuInfoTreeVOS));
+    }
+
+    private List<SysMenuInfoTreeVO> assembleSysMenuInfo(Integer pId){
+        List<SysMenuInfoTreeVO> sysMenuInfoByPid = sysMenuInfoMapper.getSysMenuInfoByPid(pId);
+        sysMenuInfoByPid.forEach(sysMenuInfoTreeVO -> {
+            sysMenuInfoTreeVO.setList(assembleSysMenuInfo(sysMenuInfoTreeVO.getId()));
+        });
+        return sysMenuInfoByPid;
     }
 }

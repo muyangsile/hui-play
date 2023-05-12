@@ -1,6 +1,9 @@
 package com.play.mapper;
 
 import com.play.entity.SysMenuInfo;
+import com.play.entity.vo.SysMenuInfoTreeVO;
+
+import java.util.List;
 
 /**
  * Description:
@@ -18,5 +21,5 @@ public interface SysMenuInfoMapper {
      */
     int addSysMenuInfo(SysMenuInfo sysMenuInfo);
 
-    SysMenuInfo test();
+    List<SysMenuInfoTreeVO> getSysMenuInfoByPid(Integer pId);
 }

@@ -9,7 +9,15 @@
         values (null, #{name}, #{title}, #{jump}, #{icon}, #{level}, #{pId}, now(), #{createUser}, default);
     </insert>
 
-    <select id="test" resultType="sysMenuInfo">
-        select * from t_sys_menu_info;
+    <select id="getSysMenuInfoByPid" resultType="sysMenuInfoTreeVO">
+        select `id`, `name`, `title`, `icon`, `jump`
+        from t_sys_menu_info
+        where
+        <if test="pId==null">
+            p_id is null
+        </if>
+        <if test="pId!=null">
+            p_id =#{pId}
+        </if>
     </select>
 </mapper>

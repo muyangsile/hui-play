@@ -1,6 +1,5 @@
 package com.play.controller;
 
-import com.play.entity.SysMenuInfo;
 import com.play.service.SysMenuInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,10 +20,9 @@ public class SysMenuInfoController {
     @Autowired
     private SysMenuInfoService sysMenuInfoService;
 
-    @RequestMapping("/showSysMenuInfo")
+    @RequestMapping("/getSysMenuInfo")
     @ResponseBody
     public String showSysMenuInfo(){
-        SysMenuInfo sysMenuInfo= sysMenuInfoService.test();
-        return sysMenuInfo.toString();
+        return sysMenuInfoService.getSysMenuInfo();
     }
 }
