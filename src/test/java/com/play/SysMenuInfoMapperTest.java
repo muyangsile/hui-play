@@ -32,7 +32,7 @@ public class SysMenuInfoMapperTest {
 
     @Test
     public void addSysMenuInfo() {
-        SysMenuInfo sysMenuInfo=new SysMenuInfo();
+       /* SysMenuInfo sysMenuInfo=new SysMenuInfo();
         sysMenuInfo.setName("businessInfoAudit");
         sysMenuInfo.setTitle("审核商家");
         sysMenuInfo.setJump(null);
@@ -41,7 +41,7 @@ public class SysMenuInfoMapperTest {
         sysMenuInfo.setPId(1);
         sysMenuInfo.setCreateUser(null);
         int rows = sysMenuInfoService.addSysMenuInfo(sysMenuInfo);
-        System.out.println(rows > 0 ? "添加成功" : "添加失败");
+        System.out.println(rows > 0 ? "添加成功" : "添加失败");*/
     }
 
     @Test
@@ -56,7 +56,7 @@ public class SysMenuInfoMapperTest {
     private List<SysMenuInfoTreeVO> assembleSysMenuInfo(Integer pId){
         List<SysMenuInfoTreeVO> sysMenuInfoByPid = sysMenuInfoMapper.getSysMenuInfoByPid(pId);
         sysMenuInfoByPid.forEach(sysMenuInfoTreeVO -> {
-            sysMenuInfoTreeVO.setList(assembleSysMenuInfo(sysMenuInfoTreeVO.getId()));
+            sysMenuInfoTreeVO.setChild(assembleSysMenuInfo(sysMenuInfoTreeVO.getId()));
         });
         return sysMenuInfoByPid;
     }

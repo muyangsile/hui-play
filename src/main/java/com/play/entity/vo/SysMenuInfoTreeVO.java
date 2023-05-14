@@ -20,9 +20,16 @@ import java.util.List;
 @NoArgsConstructor
 public class SysMenuInfoTreeVO implements Serializable {
     private Integer id;
-    private String name;
+
+    private Integer pid;
+
     private String title;
+
     private String icon;
-    private String jump;
-    private List<SysMenuInfoTreeVO> list;
+
+    private String href;
+
+    private String target;
+
+    private List<SysMenuInfoTreeVO> child;
 }

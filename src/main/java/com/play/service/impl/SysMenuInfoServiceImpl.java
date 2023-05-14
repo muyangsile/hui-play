@@ -1,5 +1,6 @@
 package com.play.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.play.comment.ResultJSON;
 import com.play.entity.SysMenuInfo;
 import com.play.entity.vo.SysMenuInfoTreeVO;
@@ -8,7 +9,9 @@ import com.play.service.SysMenuInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Description:
@@ -30,8 +33,21 @@ public class SysMenuInfoServiceImpl implements SysMenuInfoService {
 
     @Override
     public String getSysMenuInfo() {
+        Map<String,Object> menuMap=new HashMap<>();
+        Map<String,Object> homeInfo=new HashMap<>();
+        homeInfo.put("title","首页");
+        homeInfo.put("href","pages/welcome-1.html?t=1");
+        Map<String,Object> logoInfo=new HashMap<>();
+        logoInfo.put("title","惠玩儿后台管理");
+        logoInfo.put("image","static/images/logo.png");
+        logoInfo.put("href","");
+        menuMap.put("homeInfo",homeInfo);
+        menuMap.put("logoInfo",logoInfo);
+
         List<SysMenuInfoTreeVO> menuInfos=assembleSysMenuInfo(null);
-        return ResultJSON.success(menuInfos);
+        menuMap.put("menuInfo",menuInfos);
+//        return ResultJSON.success(menuMap);
+        return JSON.toJSONString(menuMap);
     }
 
     /**
@@ -41,7 +57,7 @@ public class SysMenuInfoServiceImpl implements SysMenuInfoService {
     private List<SysMenuInfoTreeVO> assembleSysMenuInfo(Integer pId){
         List<SysMenuInfoTreeVO> sysMenuInfoByPid = sysMenuInfoMapper.getSysMenuInfoByPid(pId);
         sysMenuInfoByPid.forEach(sysMenuInfoTreeVO -> {
-            sysMenuInfoTreeVO.setList(assembleSysMenuInfo(sysMenuInfoTreeVO.getId()));
+            sysMenuInfoTreeVO.setChild(assembleSysMenuInfo(sysMenuInfoTreeVO.getId()));
         });
         return sysMenuInfoByPid;
     }

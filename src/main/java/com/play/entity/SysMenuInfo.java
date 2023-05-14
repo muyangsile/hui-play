@@ -18,15 +18,14 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SysMenuInfo  implements Serializable {
+public class SysMenuInfo implements Serializable {
     private Integer id;
-    private String name;
-    private String title;
-    private String jump;
-    private String icon;
-    private Integer level;
     private Integer pId;
-    private Date createTime;
-    private Integer createUser;
+    private String icon;
+    private String href;
+    private Integer sort;
     private Integer status;
+    private String remark;
+    private Date createTime;
+    private Date updateTime;
 }

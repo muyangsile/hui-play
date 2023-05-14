@@ -10,14 +10,14 @@
     </insert>
 
     <select id="getSysMenuInfoByPid" resultType="sysMenuInfoTreeVO">
-        select `id`, `name`, `title`, `icon`, `jump`
+        select `id`,  `title`, `icon`, `href`,`target`
         from t_sys_menu_info
         where
         <if test="pId==null">
-            p_id is null
+            pid =0
         </if>
         <if test="pId!=null">
-            p_id =#{pId}
+            pid =#{pId}
         </if>
     </select>
 </mapper>
