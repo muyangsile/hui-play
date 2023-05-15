@@ -1,203 +1,217 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="ctx" value="${pageContext.request.contextPath}" />
-<!DOCTYPE html>
+<c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <title>layuimini-iframe版 v2 - 基于Layui的后台管理系统前端模板</title>
-    <meta
-            name="keywords"
-            content="layuimini,layui,layui模板,layui后台,后台模板,admin,admin模板,layui mini"
-    />
-    <meta
-            name="description"
-            content="layuimini基于layui的轻量级前端后台管理框架，最简洁、易用的后台框架模板，面向所有层次的前后端程序,只需提供一个接口就直接初始化整个框架，无需复杂操作。"
-    />
-    <meta name="renderer" content="webkit" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta http-equiv="Access-Control-Allow-Origin" content="*" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="format-detection" content="telephone=no" />
-    <link rel="icon" href="${ctx}/static/images/favicon.ico" />
-    <link rel="stylesheet" href="${ctx}/static/lib/layui-v2.6.3/css/layui.css" media="all" />
-    <link rel="stylesheet" href="${ctx}/static/css/layuimini.css?v=2.0.4.2" media="all" />
-    <link rel="stylesheet" href="${ctx}/static/css/themes/default.css" media="all" />
-    <link rel="stylesheet" href="${ctx}/static/lib/font-awesome-4.7.0/css/font-awesome.min.css" media="all" />
-    <style id="layuimini-bg-color"></style>
+    <meta charset="UTF-8">
+    <title>后台管理-登陆</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="${ctx}/static/lib/layui-v2.6.3/css/layui.css" media="all">
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden
+        }
+
+        body {
+            background: #1E9FFF;
+        }
+
+        body:after {
+            content: '';
+            background-repeat: no-repeat;
+            background-size: cover;
+            -webkit-filter: blur(3px);
+            -moz-filter: blur(3px);
+            -o-filter: blur(3px);
+            -ms-filter: blur(3px);
+            filter: blur(3px);
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+        }
+
+        .layui-container {
+            width: 100%;
+            height: 100%;
+            overflow: hidden
+        }
+
+        .admin-login-background {
+            width: 360px;
+            height: 300px;
+            position: absolute;
+            left: 50%;
+            top: 40%;
+            margin-left: -180px;
+            margin-top: -100px;
+        }
+
+        .logo-title {
+            text-align: center;
+            letter-spacing: 2px;
+            padding: 14px 0;
+        }
+
+        .logo-title h1 {
+            color: #1E9FFF;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .login-form {
+            background-color: #fff;
+            border: 1px solid #fff;
+            border-radius: 3px;
+            padding: 14px 20px;
+            box-shadow: 0 0 8px #eeeeee;
+        }
+
+        .login-form .layui-form-item {
+            position: relative;
+        }
+
+        .login-form .layui-form-item label {
+            position: absolute;
+            left: 1px;
+            top: 1px;
+            width: 38px;
+            line-height: 36px;
+            text-align: center;
+            color: #d2d2d2;
+        }
+
+        .login-form .layui-form-item input {
+            padding-left: 36px;
+        }
+
+        .captcha {
+            width: 60%;
+            display: inline-block;
+        }
+
+        .captcha-img {
+            display: inline-block;
+            width: 34%;
+            float: right;
+        }
+
+        .captcha-img img {
+            height: 34px;
+            border: 1px solid #e6e6e6;
+            height: 36px;
+            width: 100%;
+        }
+
+        .layui-form-checkbox span {
+            height: auto !important;
+        }
+    </style>
 </head>
-<body class="layui-layout-body layuimini-all">
-<div class="layui-layout layui-layout-admin">
-    <div class="layui-header header">
-        <div class="layui-logo layuimini-logo"></div>
-
-        <div class="layuimini-header-content">
-            <a>
-                <div class="layuimini-tool">
-                    <i title="展开" class="fa fa-outdent" data-side-fold="1"></i>
+<body>
+<div class="layui-container">
+    <div class="admin-login-background">
+        <div class="layui-form login-form">
+            <form class="layui-form" action="">
+                <div class="layui-form-item logo-title">
+                    <h1>惠玩儿-后台管理系统</h1>
                 </div>
-            </a>
-
-            <!--电脑端头部菜单-->
-            <ul
-                    class="
-                            layui-nav layui-layout-left
-                            layuimini-header-menu layuimini-menu-header-pc layuimini-pc-show
-                        "
-            ></ul>
-
-            <!--手机端头部菜单-->
-            <ul
-                    class="
-                            layui-nav layui-layout-left
-                            layuimini-header-menu layuimini-mobile-show
-                        "
-            >
-                <li class="layui-nav-item">
-                    <a href="javascript:;"><i class="fa fa-list-ul"></i> 选择模块</a>
-                    <dl class="layui-nav-child layuimini-menu-header-mobile"></dl>
-                </li>
-            </ul>
-
-            <ul class="layui-nav layui-layout-right">
-                <li class="layui-nav-item" lay-unselect>
-                    <a href="javascript:;" data-refresh="刷新"
-                    ><i class="fa fa-refresh"></i
-                    ></a>
-                </li>
-                <li class="layui-nav-item" lay-unselect>
-                    <a href="javascript:;" data-clear="清理" class="layuimini-clear"
-                    ><i class="fa fa-trash-o"></i
-                    ></a>
-                </li>
-                <li class="layui-nav-item mobile layui-hide-xs" lay-unselect>
-                    <a href="javascript:;" data-check-screen="full"
-                    ><i class="fa fa-arrows-alt"></i
-                    ></a>
-                </li>
-                <li class="layui-nav-item layuimini-setting">
-                    <a href="javascript:;">admin</a>
-                    <dl class="layui-nav-child">
-                        <dd>
-                            <a
-                                    href="javascript:;"
-                                    layuimini-content-href="page/user-setting.html"
-                                    data-title="基本资料"
-                                    data-icon="fa fa-gears"
-                            >基本资料<span class="layui-badge-dot"></span
-                            ></a>
-                        </dd>
-                        <dd>
-                            <a
-                                    href="javascript:;"
-                                    layuimini-content-href="pages/user-password.html"
-                                    data-title="修改密码"
-                                    data-icon="fa fa-gears"
-                            >修改密码</a
-                            >
-                        </dd>
-                        <dd>
-                            <hr />
-                        </dd>
-                        <dd>
-                            <a href="javascript:;" class="login-out">退出登录</a>
-                        </dd>
-                    </dl>
-                </li>
-                <li class="layui-nav-item layuimini-select-bgcolor" lay-unselect>
-                    <a href="javascript:;" data-bgcolor="配色方案"
-                    ><i class="fa fa-ellipsis-v"></i
-                    ></a>
-                </li>
-            </ul>
-        </div>
-    </div>
-
-    <!--无限极左侧菜单-->
-    <div class="layui-side layui-bg-black layuimini-menu-left"></div>
-
-    <!--初始化加载层-->
-    <div class="layuimini-loader">
-        <div class="layuimini-loader-inner"></div>
-    </div>
-
-    <!--手机端遮罩层-->
-    <div class="layuimini-make"></div>
-
-    <!-- 移动导航 -->
-    <div class="layuimini-site-mobile"><i class="layui-icon"></i></div>
-
-    <div class="layui-body">
-        <div
-                class="layuimini-tab layui-tab-rollTool layui-tab"
-                lay-filter="layuiminiTab"
-                lay-allowclose="true"
-        >
-            <ul class="layui-tab-title">
-                <li class="layui-this" id="layuiminiHomeTabId" lay-id=""></li>
-            </ul>
-            <div class="layui-tab-control">
-                <li class="layuimini-tab-roll-left layui-icon layui-icon-left"></li>
-                <li class="layuimini-tab-roll-right layui-icon layui-icon-right"></li>
-                <li class="layui-tab-tool layui-icon layui-icon-down">
-                    <ul class="layui-nav close-box">
-                        <li class="layui-nav-item">
-                            <a href="javascript:;"><span class="layui-nav-more"></span></a>
-                            <dl class="layui-nav-child">
-                                <dd>
-                                    <a href="javascript:;" layuimini-tab-close="current"
-                                    >关 闭 当 前</a
-                                    >
-                                </dd>
-                                <dd>
-                                    <a href="javascript:;" layuimini-tab-close="other"
-                                    >关 闭 其 他</a
-                                    >
-                                </dd>
-                                <dd>
-                                    <a href="javascript:;" layuimini-tab-close="all"
-                                    >关 闭 全 部</a
-                                    >
-                                </dd>
-                            </dl>
-                        </li>
-                    </ul>
-                </li>
-            </div>
-            <div class="layui-tab-content">
-                <div id="layuiminiHomeTabIframe" class="layui-tab-item layui-show"></div>
-            </div>
+                <div class="layui-form-item">
+                    <label class="layui-icon layui-icon-username" for="username"></label>
+                    <input type="text" name="username" id="username" lay-verify="required|account"
+                           placeholder="用户名或者邮箱"
+                           autocomplete="off" class="layui-input" value="admin">
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-icon layui-icon-password" for="password"></label>
+                    <input type="password" id="password" name="password" lay-verify="required|password"
+                           placeholder="密码"
+                           autocomplete="off" class="layui-input" value="123456">
+                </div>
+                <%--  <div class="layui-form-item">
+                      <label class="layui-icon layui-icon-vercode" for="captcha"></label>
+                      <input type="text" name="captcha" lay-verify="required|captcha" placeholder="图形验证码"
+                             autocomplete="off" class="layui-input verification captcha" value="xszg">
+                      <div class="captcha-img">
+                          <img id="captchaPic" src="${ctx}/static/images/captcha.jpg">
+                      </div>
+                  </div>--%>
+                <div class="layui-form-item">
+                    <input type="checkbox" name="rememberMe" value="true" lay-skin="primary" title="记住密码">
+                </div>
+                <div class="layui-form-item">
+                    <button class="layui-btn layui-btn layui-btn-normal layui-btn-fluid" lay-submit=""
+                            lay-filter="login">登 入
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
+<script src="${ctx}/static/lib/jquery-3.4.1/jquery-3.4.1.min.js" charset="utf-8"></script>
 <script src="${ctx}/static/lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
-<script src="${ctx}/static/js/lay-config.js?v=2.0.0" charset="utf-8"></script>
+<script src="${ctx}/static/lib/jq-module/jquery.particleground.min.js" charset="utf-8"></script>
 <script>
-    layui.use(["jquery", "layer", "miniAdmin", "miniTongji"], function () {
-        var $ = layui.jquery,
-            layer = layui.layer,
-            miniAdmin = layui.miniAdmin,
-            miniTongji = layui.miniTongji;
+    layui.use(['form'], function () {
+        var form = layui.form,
+            layer = layui.layer;
 
-        var options = {
-            iniUrl: "${ctx}/getSysMenuInfo", // 初始化接口
-            // clearUrl: "api/clear.json", // 缓存清理接口
-            urlHashLocation: true, // 是否打开hash定位
-            bgColorDefault: false, // 主题默认配置
-            multiModule: false, // 是否开启多模块
-            menuChildOpen: false, // 是否默认展开菜单
-            loadingTime: 0, // 初始化加载时间
-            pageAnim: true, // iframe窗口动画
-            maxTabNum: 20, // 最大的tab打开数量
-        };
-        miniAdmin.render(options);
+        // 登录过期的时候，跳出ifram框架
+        if (top.location != self.location) top.location = self.location;
 
-        $(".login-out").on("click", function () {
-            layer.msg("退出登录成功", function () {
-                window.location = "pages/login-3.html";
+        // 粒子线条背景
+        $(document).ready(function () {
+            $('.layui-container').particleground({
+                dotColor: '#7ec7fd',
+                lineColor: '#7ec7fd'
             });
+        });
+
+        // 进行登录操作
+        form.on('submit(login)', function (data) {
+            data = data.field;
+            if (data.username == '') {
+                layer.msg('用户名不能为空');
+                return false;
+            }
+            if (data.password == '') {
+                layer.msg('密码不能为空');
+                return false;
+            }
+
+            //异步请求
+            $.ajax({
+                url: "${ctx}/login",
+                type: "post",
+                data: {
+                    username: data.username,
+                    password: data.password
+                },
+                success: function (res) {
+                    resJson = JSON.parse(res);
+                    if (resJson.code === 0) {
+                        layer.msg('登录成功', function () {
+                            window.location = '${ctx}/home';
+                        }, 100);
+                    } else {
+                        layer.msg(resJson.msg);
+                    }
+                }
+            })
+            return false;
         });
     });
 </script>

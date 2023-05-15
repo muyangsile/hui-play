@@ -20,4 +20,17 @@
             pid =#{pId}
         </if>
     </select>
+    <select id="getSysMenuInfoByUserIdAndPid" resultType="sysMenuInfoTreeVO">
+        SELECT menu.`id`, menu.`title`, menu.`icon`, menu.`href`,menu.`target`
+        from t_sys_menu_info menu
+        LEFT JOIN t_role_menu rm on rm.menu_id=menu.id
+        LEFT JOIN t_role_user ru on ru.role_id =rm.role_id
+        WHERE ru.user_id=#{userId}
+        <if test="pId==null">
+            AND menu.pid=0
+        </if>
+        <if test="pId!=null">
+            AND menu.pid=#{pId};
+        </if>
+    </select>
 </mapper>

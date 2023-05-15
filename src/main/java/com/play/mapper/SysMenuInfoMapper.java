@@ -2,6 +2,7 @@ package com.play.mapper;
 
 import com.play.entity.SysMenuInfo;
 import com.play.entity.vo.SysMenuInfoTreeVO;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -22,4 +23,5 @@ public interface SysMenuInfoMapper {
     int addSysMenuInfo(SysMenuInfo sysMenuInfo);
 
     List<SysMenuInfoTreeVO> getSysMenuInfoByPid(Integer pId);
+    List<SysMenuInfoTreeVO> getSysMenuInfoByUserIdAndPid(@Param("userId") Integer userId, @Param("pId") Integer pId);
 }

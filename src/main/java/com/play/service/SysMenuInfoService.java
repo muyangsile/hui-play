@@ -2,6 +2,7 @@ package com.play.service;
 
 import com.play.comment.ResultJSON;
 import com.play.entity.SysMenuInfo;
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * Description:
@@ -13,5 +14,5 @@ import com.play.entity.SysMenuInfo;
  */
 public interface SysMenuInfoService {
     int addSysMenuInfo(SysMenuInfo sysMenuInfo);
-    String getSysMenuInfo();
+    String getSysMenuInfo(HttpServletRequest request);
 }
